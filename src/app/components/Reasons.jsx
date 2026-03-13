@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-
 const reasons = [
 "Your smile.",
 "Your eyes.",
@@ -142,7 +141,9 @@ function Reasons() {
         </ul>
 
       </motion.div>
+
     </div>
+
   );
 }
 
