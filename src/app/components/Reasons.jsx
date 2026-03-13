@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+
+
 const reasons = [
 "Your smile.",
 "Your eyes.",
@@ -106,18 +108,44 @@ const reasons = [
 
 function Reasons() {
   return (
-    <div className="min-h-screen py-16 px-6 bg-gradient-to-br from-pink-200 via-rose-200 to-purple-200">
+    <div className="relative min-h-screen py-16 px-6 bg-gradient-to-br from-pink-200 via-rose-200 to-purple-200 overflow-hidden">
+
+      {/* Floating Hearts */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.span
+            key={i}
+            initial={{ y: "100vh", opacity: 0 }}
+            animate={{ y: "-10vh", opacity: 1 }}
+            transition={{
+              duration: 10 + Math.random() * 10,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+            }}
+            className="absolute text-pink-400 text-2xl"
+            style={{
+              left: `${Math.random() * 100}%`,
+            }}
+          >
+            ❤️
+          </motion.span>
+        ))}
+      </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="max-w-4xl mx-auto text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        className="max-w-4xl mx-auto text-center relative z-10"
       >
-
-        <h2 className="text-3xl md:text-5xl font-bold text-rose-700 mb-4">
+        {/* Romantic Title */}
+        <motion.h2
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-3xl md:text-5xl font-bold text-rose-700 mb-4"
+        >
           100 Reasons Why I Love You ❤️
-        </h2>
+        </motion.h2>
 
         <p className="text-lg md:text-2xl text-rose-600 mb-10">
           Here are some of the reasons why I love you
@@ -128,22 +156,23 @@ function Reasons() {
           {reasons.map((reason, index) => (
             <motion.li
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.02 }}
-              whileHover={{ scale: 1.03 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.02 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 0px 20px rgba(255,105,180,0.6)",
+              }}
               className="bg-white/70 backdrop-blur-md shadow-lg rounded-xl p-4 text-rose-800 text-lg"
             >
-              {index + 1}. {reason}
+              ❤️ {index + 1}. {reason}
             </motion.li>
           ))}
 
         </ul>
-
       </motion.div>
-
     </div>
-
   );
 }
 
